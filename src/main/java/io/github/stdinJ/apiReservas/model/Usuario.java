@@ -1,13 +1,18 @@
 package io.github.stdinJ.apiReservas.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "usuario")
 public class Usuario {
+    @Id
     private int id;
     private String name;
     private String email;
     private String telefone;
     private String senha;
     private String tipo; // CLIENTE, FUNCIONARIO, ADMIN
-
 
     public int getId() {
         return id;
