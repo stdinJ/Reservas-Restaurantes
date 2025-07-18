@@ -10,7 +10,6 @@ public class Usuario {
     private int id;
     private String name;
     private String email;
-    private String telefone;
     private String senha;
     private String tipo; // CLIENTE, FUNCIONARIO, ADMIN
 
@@ -38,14 +37,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -68,7 +59,6 @@ public class Usuario {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", telefone='" + telefone + '\'' +
                 ", senha='" + senha + '\'' +
                 ", tipo='" + tipo + '\'' +
                 '}';
