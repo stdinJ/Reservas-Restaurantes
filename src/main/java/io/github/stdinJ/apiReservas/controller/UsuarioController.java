@@ -37,7 +37,6 @@ public class UsuarioController {
         }
     }
 
-
     //INCREMENTA PARA CADA USUARIO CADASTRADO
     @PostMapping("/registrar")
     public ResponseEntity<List<Usuario>> salvarUsuarios(@RequestBody List<Usuario> usuarios) {
@@ -51,6 +50,19 @@ public class UsuarioController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(salvos);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+
+        if (usuario.isPresent()) {
+            usuarioRepository.deleteById(id);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+    }
+
     //LOGIN USUARIO E CRIAÇÃO DO TOKEN JWT
     @PostMapping("/login")
     public void loginUsuario(@RequestBody Usuario usuario){
