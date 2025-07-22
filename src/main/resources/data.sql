@@ -1,6 +1,6 @@
 -- Tabela: usuarios
 CREATE TABLE usuarios (
-    id SERIAL PRIMARY KEY,
+    usuario_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE usuarios (
 
 -- Tabela: mesas
 CREATE TABLE mesas (
-    id SERIAL PRIMARY KEY,
+    mesa_id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     capacidade INTEGER NOT NULL CHECK (capacidade > 0),
     status VARCHAR(20) NOT NULL  -- exemplo: 'disponível', 'reservada', 'inativa'
