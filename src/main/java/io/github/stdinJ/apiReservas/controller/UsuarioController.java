@@ -31,10 +31,10 @@ public class UsuarioController {
     public ResponseEntity<Usuario> acharUsuario(@PathVariable Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
 
-        if (usuario.isPresent()) {
-            return ResponseEntity.ok(usuario.get());
-        } else {
+        if (usuario.isEmpty()) {
             return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(usuario.get());
         }
     }
 
