@@ -25,11 +25,11 @@ CREATE TABLE reservas (
 
     CONSTRAINT fk_usuario
         FOREIGN KEY (usuario_id)
-        REFERENCES usuarios(id)
+        REFERENCES usuarios(usuario_id)
         ON DELETE CASCADE,
 
     CONSTRAINT fk_mesa
         FOREIGN KEY (mesa_id)
-        REFERENCES mesas(id)
+        REFERENCES mesas(mesa_id)
         ON DELETE CASCADE
 );
