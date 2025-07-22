@@ -6,12 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
+    private int proximoId = 1;
 
     private final UsuarioRepository usuarioRepository;
 
@@ -37,10 +40,13 @@ public class UsuarioController {
 
     //INCREMENTA PARA CADA USUARIO CADASTRADO
     @PostMapping("/registrar")
-    public ResponseEntity<List<Usuario>> salvarUsuarios(@RequestBody List<Usuario> usuarios) {
-        List<Usuario> salvos = usuarioRepository.saveAll(usuarios);
-        System.out.println("Usuários cadastrados com sucesso: " + salvos);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salvos);
+    public ResponseEntity<Usuario> salvarUsuario(@RequestBody Usuario usuario) {
+        usuario.setId(proximoId++); // define ID manualmente
+        Usuario salvo = usuarioRepository.save(usuario);
+
+        System.out.println("Usuário cadastrado com sucesso: " + salvo);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
 
 
