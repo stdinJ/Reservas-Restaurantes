@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +15,6 @@ public class UsuarioController {
 
     private final UsuarioRepository usuarioRepository;
 
-    private int proximoId = 1;
-
     public UsuarioController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
@@ -26,6 +23,7 @@ public class UsuarioController {
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
     }
+
     @GetMapping("/{id}/usuario")
     public ResponseEntity<Usuario> acharUsuario(@PathVariable Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
@@ -40,16 +38,11 @@ public class UsuarioController {
     //INCREMENTA PARA CADA USUARIO CADASTRADO
     @PostMapping("/registrar")
     public ResponseEntity<List<Usuario>> salvarUsuarios(@RequestBody List<Usuario> usuarios) {
-        List<Usuario> salvos = new ArrayList<>();
-
-        for (Usuario usuario : usuarios) {
-            usuario.setId(proximoId++);
-            salvos.add(usuarioRepository.save(usuario));
-        }
-        System.out.println("Usuario cadastrado com sucesso: " + usuarios);
-
+        List<Usuario> salvos = usuarioRepository.saveAll(usuarios);
+        System.out.println("Usuários cadastrados com sucesso: " + salvos);
         return ResponseEntity.status(HttpStatus.CREATED).body(salvos);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {

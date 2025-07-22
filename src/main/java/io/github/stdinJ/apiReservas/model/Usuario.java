@@ -4,14 +4,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario {
     @Id
     private int id;
     private String name;
     private String email;
     private String senha;
-    private String tipo; // CLIENTE, FUNCIONARIO, ADMIN
+    private String role; // CLIENTE, FUNCIONARIO, ADMIN
 
     public int getId() {
         return id;
@@ -45,12 +45,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getRole() {
+        return role;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Usuario {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
-                ", tipo='" + tipo + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
