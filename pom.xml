@@ -9,10 +9,17 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.stdinJ</groupId>
+<<<<<<< HEAD
 	<artifactId>agendamentoapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>agendamentoapi</name>
 	<description>API para agendamento de mesas em um Restaurante</description>
+=======
+	<artifactId>apiReservas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Sistema de Reservas API</name>
+	<description>API de Reservas</description>
+>>>>>>> f77f67147acffd9c0ee35e9ca2a402916ac30c79
 	<url/>
 	<licenses>
 		<license/>
@@ -40,8 +47,19 @@
 		</dependency>
 
 		<dependency>
+<<<<<<< HEAD
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+=======
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+>>>>>>> f77f67147acffd9c0ee35e9ca2a402916ac30c79
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

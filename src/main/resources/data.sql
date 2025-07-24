@@ -23,7 +23,10 @@ CREATE TABLE reservas (
     data_reserva TIMESTAMP NOT NULL,
     status VARCHAR(20) NOT NULL,  -- exemplo: 'ativo', 'cancelado'
 
+<<<<<<< HEAD
     CONSTRAINT unique_mesa_data_reserva UNIQUE (mesa_id, data_reserva),
+=======
+>>>>>>> f77f67147acffd9c0ee35e9ca2a402916ac30c79
     CONSTRAINT fk_usuario
         FOREIGN KEY (usuario_id)
         REFERENCES usuarios(usuario_id)

@@ -1,4 +1,5 @@
 spring:
+<<<<<<< HEAD
   datasource:
     url: jdbc:postgresql://localhost:5432/agendamento
     username: postgres
@@ -7,3 +8,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+=======
+  application:
+    name: Sistema de Reservas API
+  datasource:
+    url: jdbc:h2:mem:reservas
+    username : sa
+    password: 1234
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+>>>>>>> f77f67147acffd9c0ee35e9ca2a402916ac30c79

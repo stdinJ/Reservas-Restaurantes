@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableJpaRepositories(basePackages = "io.github.stdinJ.apiReservas.repository")
 @EntityScan(basePackages = "io.github.stdinJ.apiReservas.model")
+
 public class SistemaDeReservasApiApplication {
 
 	@GetMapping("/hello")
