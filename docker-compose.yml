@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: agendamentodb
+    image: postgres:16.9
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: agendamento
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - agendamento-net
+
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: joao@email.com
+      PGADMIN_DEFAULT_PASSWORD: 12345
+    ports:
+      - "15432:80"
+    depends_on:
+      - db
+    networks:
+      - agendamento-net
+
+  backend:
+    container_name: springboot-app
+    build:
+      context: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/agendamento
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - agendamento-net
+
+volumes:
+  postgres_data:
+
+networks:
+  agendamento-net:
+    driver: bridge
