@@ -38,17 +38,12 @@ public class UsuarioController {
         }
     }
 
-    //INCREMENTA PARA CADA USUARIO CADASTRADO
     @PostMapping("/registrar")
     public ResponseEntity<Usuario> salvarUsuario(@RequestBody Usuario usuario) {
-        usuario.setId(proximoId++); // define ID manualmente
         Usuario salvo = usuarioRepository.save(usuario);
-
         System.out.println("Usuário cadastrado com sucesso: " + salvo);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {

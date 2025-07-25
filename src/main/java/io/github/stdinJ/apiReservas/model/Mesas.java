@@ -1,22 +1,21 @@
 package io.github.stdinJ.apiReservas.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "mesas")
 public class Mesas {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int mesaId;
     private String num;
     private int capacidade;
 
-    public int getId() {
-        return id;
+    public int getMesaId() {
+        return mesaId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMesaId(int mesaId) {
+        this.mesaId = mesaId;
     }
 
     public String getNum() {
@@ -38,7 +37,7 @@ public class Mesas {
     @Override
     public String toString() {
         return "Mesas{" +
-                "id=" + id +
+                "mesaId" + mesaId +
                 ", num='" + num + '\'' +
                 ", capacidade=" + capacidade +
                 '}';

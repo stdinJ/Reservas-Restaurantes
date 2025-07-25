@@ -1,19 +1,27 @@
 package io.github.stdinJ.apiReservas.model;
 
 import java.time.LocalDateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="reservas")
 public class Reserva {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int usuarioId;
-    private int mesaId;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "mesaId")
+    private Mesas mesa;
+
+    @Column(name = "horario_reserva")
     private LocalDateTime horarioReserva;
+
     private String status;
 
     public int getId() {
@@ -24,20 +32,20 @@ public class Reserva {
         this.id = id;
     }
 
-    public int getUsuarioId() {
-        return usuarioId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getMesaId() {
-        return mesaId;
+    public Mesas getMesa() {
+        return mesa;
     }
 
-    public void setMesaId(int mesaId) {
-        this.mesaId = mesaId;
+    public void setMesa(Mesas mesa) {
+        this.mesa = mesa;
     }
 
     public LocalDateTime getHorarioReserva() {
@@ -60,8 +68,8 @@ public class Reserva {
     public String toString() {
         return "Reserva{" +
                 "id=" + id +
-                ", usuarioId=" + usuarioId +
-                ", mesaId=" + mesaId +
+                ", usuario=" + usuario +
+                ", mesa=" + mesa +
                 ", horarioReserva=" + horarioReserva +
                 ", status='" + status + '\'' +
                 '}';
