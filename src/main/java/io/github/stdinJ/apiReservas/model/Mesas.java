@@ -6,9 +6,14 @@ import jakarta.persistence.*;
 public class Mesas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "mesa_id")
     private int mesaId;
-    private String num;
+
     private int capacidade;
+
+    private String status;
+
+    private String nome;
 
     public int getMesaId() {
         return mesaId;
@@ -16,14 +21,6 @@ public class Mesas {
 
     public void setMesaId(int mesaId) {
         this.mesaId = mesaId;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
     }
 
     public int getCapacidade() {
@@ -34,12 +31,29 @@ public class Mesas {
         this.capacidade = capacidade;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
         return "Mesas{" +
-                "mesaId" + mesaId +
-                ", num='" + num + '\'' +
+                "mesaId=" + mesaId +
                 ", capacidade=" + capacidade +
+                ", status='" + status + '\'' +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 }

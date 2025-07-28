@@ -28,7 +28,7 @@ public class DatabaseConfiguration {
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(url); // não se esqueça dessa linha!
+        config.setJdbcUrl(url);
         config.setUsername(username);
         config.setPassword(password);
         config.setDriverClassName(driver);

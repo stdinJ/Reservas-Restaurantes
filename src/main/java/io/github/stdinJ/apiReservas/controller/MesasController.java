@@ -1,4 +1,5 @@
 package io.github.stdinJ.apiReservas.controller;
+import io.github.stdinJ.apiReservas.dto.*;
 
 import io.github.stdinJ.apiReservas.model.Mesas;
 import io.github.stdinJ.apiReservas.model.Usuario;
@@ -24,20 +25,28 @@ public class MesasController {
         this.mesasRepository = mesasRepository;
     }
 
-    @PostMapping("/criarmesa")
-    public ResponseEntity<Mesas> criarMesa(@RequestBody Mesas mesa, @RequestHeader("userId") Long userId) {
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(userId);
 
-        if (optionalUsuario.isEmpty() || !"ADMIN".equals(optionalUsuario.get().getRole())) {
+    @PostMapping("/criarmesa")
+    public ResponseEntity<Mesas> criarMesa(@RequestBody CriarMesa request) {
+        Optional<Usuario> usuario = usuarioRepository.findByNome(request.getNome());  // buscar por nome
+
+        if (usuario.isEmpty() || !"ADMIN".equalsIgnoreCase(usuario.get().getRole())) {
             System.out.println("Ação não permitida");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+
+        Mesas mesa = new Mesas();
+        mesa.setCapacidade(request.getCapacidade());
+        mesa.setCapacidade(request.getCapacidade());
 
         Mesas novaMesa = mesasRepository.save(mesa);
 
         System.out.println("Nova mesa criada: " + novaMesa);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaMesa);
     }
+
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerMesa(@PathVariable Long id, @RequestHeader("userId") Long userId) {
@@ -75,14 +84,15 @@ public class MesasController {
     @PutMapping("/{id}")
     public ResponseEntity<Mesas> atualizarMesa(@PathVariable Long id, @RequestBody Mesas mesaAtualizada, @RequestHeader("userId") Long userId) {
         Optional<Usuario> usuario = usuarioRepository.findById(userId);
-        if (usuario.isEmpty() || !"ADMIN".equals(usuario.get().getRole())) {
+        if (usuario.isEmpty() || !"ADMIN".equalsIgnoreCase(usuario.get().getRole())) {
             System.out.println("Ação não permitida");
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
+
         return mesasRepository.findById(id)
                 .map(mesaExistente -> {
-                    mesaExistente.setNum(mesaAtualizada.getNum());
+                    mesaExistente.setCapacidade(mesaAtualizada.getCapacidade());
                     mesaExistente.setCapacidade(mesaAtualizada.getCapacidade());
 
                     Mesas mesaSalva = mesasRepository.save(mesaExistente);

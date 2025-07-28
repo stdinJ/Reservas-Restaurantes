@@ -1,9 +1,15 @@
+application:
+  name: Sistema de Reservas API
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/agendamento
+    url: jdbc:postgresql://db:5432/agendamento
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-  application:
-    name: Sistema de Reservas API
-  
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

@@ -10,7 +10,6 @@ CREATE TABLE usuarios (
 -- Tabela: mesas
 CREATE TABLE mesas (
     mesa_id SERIAL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL,
     capacidade INTEGER NOT NULL CHECK (capacidade > 0),
     status VARCHAR(20) NOT NULL
 );

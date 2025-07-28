@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   db:
     container_name: agendamentodb
-    image: postgres:16.9
+    image: postgres:16.2
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -12,21 +10,14 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./db/initdb:/docker-entrypoint-initdb.d
     networks:
       - agendamento-net
-
-  pgadmin:
-    container_name: pgadmin4
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: joao@email.com
-      PGADMIN_DEFAULT_PASSWORD: 12345
-    ports:
-      - "15432:80"
-    depends_on:
-      - db
-    networks:
-      - agendamento-net
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     container_name: springboot-app
@@ -39,7 +30,24 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - agendamento-net
+    restart: on-failure
+
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: joao@email.com
+      PGADMIN_DEFAULT_PASSWORD: 12345
+    ports:
+      - "15432:80"
+    depends_on:
       - db
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
     networks:
       - agendamento-net
 
